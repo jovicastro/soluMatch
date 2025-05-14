@@ -1,0 +1,35 @@
+* {
+    padding: 0px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.navbar{
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    background-color: #023047;
+    justify-content: space-between;
+
+}
+.homeContentC{
+    display: flex;
+    align-items: center;
+
+}
+
+.homeContentC p:hover {
+    border-bottom: 10px solid rgb(255, 255, 255);
+  }
+
+.homeContentC p{
+    color: white;
+    font-size: 22px;
+    padding: 15px;
+}
+
+.logo {
+    max-width: 150px;  /* limita o tamanho */
+    height: auto;      /* mantém a proporção */
+  }
