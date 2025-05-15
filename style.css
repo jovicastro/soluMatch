@@ -1,0 +1,82 @@
+
+header {
+  justify-content:none;
+}
+
+.backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000; /* garante que fique sobre os outros elementos */
+  background-color: transparent; /* ou use uma cor de fundo */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.backButton img{
+  border-radius: 50%;
+  fill: black;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to left, #00b4db, #0083b0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.logo img{
+  text-align: center;
+  width: 150px;
+}
+
+
+.login-container {
+  background: rgb(255, 255, 255,0.5);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  width: 300px;
+  text-align: center;
+  filter: blur(0px);
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #023047;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-container button:hover {
+  background-color: #005f75;
+}
+
+#error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
