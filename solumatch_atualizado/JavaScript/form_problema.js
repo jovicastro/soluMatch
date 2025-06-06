@@ -170,7 +170,7 @@ backBtn.addEventListener('click', () => {
 
 // Envia o formulário (simulação)
 submitBtn.addEventListener('click', () => {
-    alert('Formulário enviado com sucesso!');
+    alert('Para concluir as prédefinições, conclua o cadastro no Solumatch!');
     // Aqui você pode adicionar o código para enviar os dados para o servidor
 });
 

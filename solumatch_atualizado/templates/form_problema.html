@@ -12,17 +12,16 @@
   <!-- Barra de navegação principal -->
   <nav class="navbar">
       <!-- Logo/nome da empresa -->
-      <div class="logo">
-          <img src="../misc/logo2.jpg" width="50vh">
-          <h2>Solu<span>Match<span></h2>
-      </div>
+      <a href="../templates/home.html">
+        <div class="logo">
+            <img src="../misc/logo2.png" width="50vh">
+            <h2>Solu<span>Match<span></h2>
+        </div>
+    </a>
       
       <!-- Links de navegação do menu -->
       <div class="nav-links">
-          <!-- Link ativo (página atual) -->
-          <a src="../templates/form_problema.html" class="nav-link active">Eu quero contratar</a>
-          <!-- Link normal -->
-          <a href="#" class="nav-link">Eu quero trabalhar</a>
+          
           <!-- Link de login -->
           <a href="../templates/login.php" class="login-link">Faça login</a>
           <!-- Botão principal de call-to-action -->
@@ -93,7 +92,7 @@
         <div id="questionsSection" class="questions-container">
             <h2 id="questionsTitle">Perguntas sobre o seu problema</h2>
             <div id="dynamicQuestions"></div>
-            <button class="continue-btn" id="submitBtn">Enviar Projeto</button>
+            <button class="continue-btn" src="../templates/cadastro.php" id="submitBtn">Enviar Projeto</button>
             <button class="continue-btn back-btn" id="backBtn">Voltar</button>
         </div>
     </div>

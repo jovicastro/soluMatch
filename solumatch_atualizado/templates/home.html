@@ -16,22 +16,24 @@
         <!-- Barra de navegação principal -->
         <nav class="navbar">
             <!-- Logo/nome da empresa -->
-            <div class="logo">
-                <img src="../misc/logo2.jpg" width="50vh">
-                <h2>Solu<span>Match<span></h2>
-            </div>
-            
+            <a href="../templates/home.html">
+                <div class="logo">
+                    <img src="../misc/logo2.png" width="50vh">
+                    <h2>Solu<span>Match<span></h2>
+                </div>
+            </a>
+
             <!-- Links de navegação do menu -->
             <div class="nav-links">
-                <!-- Link ativo (página atual) -->
-                <a src="../templates/form_problema.html" class="nav-link active">Eu quero contratar</a>
-                <!-- Link normal -->
-                <a href="#" class="nav-link">Eu quero trabalhar</a>
                 <!-- Link de login -->
                 <a href="../templates/login.php" class="login-link">Faça login</a>
                 <!-- Botão principal de call-to-action -->
                 <a href="../templates/cadastro.php"  class="cta-button">Cadastre-se</a>
+                <!--Botão para obter suporte -->
+                <a href="../templates/ajuda.html" class="btn-suporte">Obtenha ajuda</a>
             </div>
+
+            
             
             <!-- Menu hambúrguer para dispositivos móveis (3 linhas) -->
             <div class="mobile-menu-toggle">
@@ -86,7 +88,7 @@
                         <!-- Botão principal -->
                         <a href="../templates/form_problema.html"class="primary-button">Eu quero contratar</a>
                         <!-- Link secundário com seta -->
-                        <a href="../" class="secondary-button">
+                        <a href="../templates/quero_trabalhar.html" class="secondary-button">
                             Você quer trabalhar? 
                             <span class="arrow">→</span>
                         </a>

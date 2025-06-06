@@ -58,6 +58,7 @@ body {
   display: flex; /* Layout flexível */
   align-items: center; /* Centraliza verticalmente */
   gap: 2rem; /* Espaço entre elementos */
+
 }
 
 /* ESTILOS DOS LINKS DE NAVEGAÇÃO */
@@ -101,6 +102,10 @@ body {
 .cta-button:hover {
   background: rgb(0, 89, 255); /* Cor mais escura */
   transform: translateY(-2px); /* Move para cima */
+}
+
+a , .btn-suporte {
+  text-decoration: none;
 }
 
 /* MENU MOBILE (inicialmente escondido) */

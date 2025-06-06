@@ -1,16 +1,8 @@
-/**
- * Formata o número de telefone no formato (XX) XXXXX-XXXX
- * @param {string} numero - O número de telefone a ser formatado
- * @returns {string} - O número formatado
- */
+// Adicione esta função antes do event listener
 function formatarTelefone(numero) {
-    // Remove todos os caracteres não numéricos
     let numeroStr = numero.replace(/\D/g, '');
-
-    // Limita ao tamanho máximo de 11 dígitos (DDD + número)
     numeroStr = numeroStr.substring(0, 11);
-
-    // Aplica a formatação
+    
     if (numeroStr.length <= 2) {
         return `(${numeroStr}`;
     } else if (numeroStr.length <= 7) {
@@ -20,19 +12,17 @@ function formatarTelefone(numero) {
     }
 }
 
-/**
- * Aplica a formatação ao campo de texto enquanto o usuário digita
- * @param {HTMLInputElement} input - O campo de texto do telefone
- */
+// Adicione esta função (que estava faltando)
 function aplicarFormatacaoTelefone(input) {
     const valorFormatado = formatarTelefone(input.value);
     input.value = valorFormatado;
 }
 
-// Adiciona o evento de input ao campo de telefone
+// Mantenha o restante do código
 document.addEventListener("DOMContentLoaded", function () {
-    const campoTelefone = document.querySelector('input[placeholder="Digite aqui o Telefone Empresarial"]');
+    const campoTelefone = document.querySelector('input[name="numero"]');
     if (campoTelefone) {
+        console.log("Vinculando evento de formatação ao telefone");
         campoTelefone.addEventListener("input", function () {
             aplicarFormatacaoTelefone(campoTelefone);
         });
