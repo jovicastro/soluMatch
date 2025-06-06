@@ -1,33 +1,18 @@
 <?php
 // solumatch_atualizado/templates/reset_password.php
 
-// Inclui as classes necessárias
-require_once __DIR__ . '/../classes/database.php'; // Caminho para sua classe Database
+// Inclui o arquivo de configuração, que já estabelece a conexão $pdo
+require_once __DIR__ . '/../../config.php'; // Caminho para o seu config.php
 require_once __DIR__ . '/../classes/user.php';     // Caminho para a nova classe User
 
 $message = '';
 $message_type = ''; // 'success' ou 'error'
-$token = $_GET['token'] ?? ''; // **CORRIGIDO: Removido FILTER_SANITIZE_STRING**
+$token = $_GET['token'] ?? ''; // Obtém o token da URL
 $validToken = false;
 $userId = null;
 
-// Configurações do banco de dados (ajuste se for diferente)
-$dbHost = 'localhost';
-$dbUser = 'root';
-$dbPass = '';
-$dbName = 'solu_match';
-
-try {
-    // Instancia a classe Database e obtém a conexão mysqli
-    $database = new Database($dbHost, $dbUser, $dbPass, $dbName);
-    $dbConnection = $database->getConnection();
-    $user = new User($dbConnection); // Passa a conexão mysqli para a classe User
-} catch (Exception $e) {
-    $message = "Erro no sistema de recuperação de senha. Por favor, tente mais tarde.";
-    $message_type = 'error';
-    error_log("Erro na conexão para redefinição de senha: " . $e->getMessage());
-    exit();
-}
+// A conexão $pdo já está disponível globalmente do config.php
+$user = new User($pdo); // Passa a instância PDO para a classe User
 
 
 // --- Validar o token primeiro ---
@@ -59,7 +44,23 @@ if ($validToken && $_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strlen($newPassword) < 8) { // Requisito de senha: mínimo de 8 caracteres
         $message = 'A senha deve ter pelo menos 8 caracteres.';
         $message_type = 'error';
-    } else {
+    }
+    // NOVAS REGRAS DE COMPLEXIDADE (PHP):
+    elseif (!preg_match('/[A-Z]/', $newPassword)) { // Pelo menos uma letra maiúscula
+        $message = 'A senha deve conter pelo menos uma letra maiúscula.';
+        $message_type = 'error';
+    } elseif (!preg_match('/[a-z]/', $newPassword)) { // Pelo menos uma letra minúscula
+        $message = 'A senha deve conter pelo menos uma letra minúscula.';
+        $message_type = 'error';
+    } elseif (!preg_match('/[0-9]/', $newPassword)) { // Pelo menos um número
+        $message = 'A senha deve conter pelo menos um número.';
+        $message_type = 'error';
+    } elseif (!preg_match('/[^A-Za-z0-9]/', $newPassword)) { // Pelo menos um caractere especial
+        $message = 'A senha deve conter pelo menos um caractere especial (ex: !, @, #, $).';
+        $message_type = 'error';
+    }
+    // FIM DAS NOVAS REGRAS DE COMPLEXIDADE
+    else {
         if ($user->resetPassword($userId, $newPassword)) {
             $message = 'Sua senha foi redefinida com sucesso! Você já pode fazer login com sua nova senha.';
             $message_type = 'success';
@@ -70,11 +71,9 @@ if ($validToken && $_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-// Garante que a conexão com o banco de dados seja fechada
-if (isset($database)) {
-    $database->closeConnection();
-}
+// Não é necessário fechar a conexão $pdo aqui, pois ela é gerenciada pelo config.php.
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -84,7 +83,7 @@ if (isset($database)) {
     <link rel="stylesheet" href="../../CSS/resetar_senha.css">
 </head>
 <body>
-    <div class="container">
+      <div class="container">
         <h2>Redefinir Senha</h2>
         <?php if ($message): ?>
             <div class="message <?php echo $message_type; ?>">
@@ -97,6 +96,13 @@ if (isset($database)) {
                 <div class="form-group">
                     <label for="password">Nova Senha:</label>
                     <input type="password" id="password" name="password" required>
+                    <ul class="password-requirements">
+                        <li id="reqLength"><span class="icon"></span> Pelo menos 8 caracteres</li>
+                        <li id="reqUpper"><span class="icon"></span> Pelo menos uma letra maiúscula</li>
+                        <li id="reqLower"><span class="icon"></span> Pelo menos uma letra minúscula</li>
+                        <li id="reqNumber"><span class="icon"></span> Pelo menos um número</li>
+                        <li id="reqSpecial"><span class="icon"></span> Pelo menos um caractere especial</li>
+                    </ul>
                 </div>
                 <div class="form-group">
                     <label for="confirm_password">Confirmar Senha:</label>
@@ -107,8 +113,10 @@ if (isset($database)) {
         <?php elseif ($message_type === 'success'): ?>
              <p><a href="../../templates/login.php">Ir para a página de Login</a></p>
         <?php else: ?>
-            <p>Se você precisa de um novo link de redefinição, por favor, <a href="../Public/esqueci_senha.php">clique aqui</a>.</p>
+            <p>Se você precisa de um novo link de redefinição, por favor, <a href="esqueci_senha.php">clique aqui</a>.</p>
         <?php endif; ?>
     </div>
+
+    <script src="../../JavaScript/resetar_senha.js"></script>
 </body>
 </html>
